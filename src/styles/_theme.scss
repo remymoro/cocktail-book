@@ -40,3 +40,9 @@ body {
 .radius {
   border-radius: var(--radius);
 }
+
+input {
+  border: var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
