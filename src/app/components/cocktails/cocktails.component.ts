@@ -14,10 +14,13 @@ import { cocktails } from 'app/shared/data';
       [cocktails]="cocktails()"
       class="w-half xs-w-full card"
     />
+
+    @if (selectedCocktail()) {
     <app-cocktail-details
       [cocktail]="selectedCocktail()"
       class="w-half xs-w-full card"
     />
+    }
   `,
   styles: `
     :host {
@@ -31,9 +34,9 @@ import { cocktails } from 'app/shared/data';
   `,
 })
 export class CocktailsComponent {
-  cocktails = signal<Cocktail[]>(cocktails);
+  cocktails = signal<Cocktail[]>([]);
   selectedCocktail = signal<Cocktail>(this.cocktails()[0]);
-  selectedCocktailName = computed(() => this.selectedCocktail().name);
+  selectedCocktailName = computed(() => this.selectedCocktail()?.name);
 
   selectCocktail(cocktailName: string) {
     const newCocktail = this.cocktails().find(
