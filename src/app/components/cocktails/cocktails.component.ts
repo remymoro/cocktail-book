@@ -1,25 +1,21 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CocktailsListComponent } from './components/cocktails-list.component';
 import { CocktailDetailsComponent } from './components/cocktail-details.component';
 import { Cocktail } from 'app/shared/interfaces';
-import { cocktails } from 'app/shared/data';
+import { CocktailsService } from 'app/shared/services/cocktails.service';
 
 @Component({
   selector: 'app-cocktails',
   imports: [CocktailsListComponent, CocktailDetailsComponent],
   template: `
     <app-cocktails-list
-      (selectCocktail)="selectCocktail($event)"
-      [selectedCocktailName]="selectedCocktailName()"
+      [(selectedCocktailId)]="selectedCocktailId"
       [cocktails]="cocktails()"
       class="w-half xs-w-full card"
     />
 
-    @if (selectedCocktail()) {
-    <app-cocktail-details
-      [cocktail]="selectedCocktail()"
-      class="w-half xs-w-full card"
-    />
+    @let sc = selectCocktail(); @if (sc) {
+    <app-cocktail-details [cocktail]="sc" class="w-half xs-w-full card" />
     }
   `,
   styles: `
@@ -34,16 +30,14 @@ import { cocktails } from 'app/shared/data';
   `,
 })
 export class CocktailsComponent {
-  cocktails = signal<Cocktail[]>([]);
-  selectedCocktail = signal<Cocktail>(this.cocktails()[0]);
-  selectedCocktailName = computed(() => this.selectedCocktail()?.name);
+  cocktailService: CocktailsService = inject(CocktailsService);
 
-  selectCocktail(cocktailName: string) {
-    const newCocktail = this.cocktails().find(
-      ({ name }) => name === cocktailName
-    );
-    if (newCocktail) {
-      this.selectedCocktail.set(newCocktail);
-    }
-  }
+  cocktails = computed(
+    () => this.cocktailService.cocktailsResource.value() || []
+  );
+  selectedCocktailId = signal<string | null>(null);
+  selectCocktail = computed(() =>
+    this.cocktails().find(({ _id }) => _id === this.selectedCocktailId())
+  );
+  selectedCocktailName = computed(() => this.selectCocktail()?.name);
 }

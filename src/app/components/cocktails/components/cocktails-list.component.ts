@@ -1,4 +1,11 @@
-import { Component, computed, input, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  input,
+  model,
+  output,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Cocktail } from 'app/shared/interfaces';
 
@@ -15,11 +22,11 @@ import { Cocktail } from 'app/shared/interfaces';
     />
     <ul class="mb-20">
       @for (cocktail of filteredCocktails(); track cocktail.name) { @let active
-      = cocktail.name === selectedCocktailName();
+      = cocktail._id === selectedCocktailId();
       <li
         [class.active-item]="active"
         [class.text-primary]="active"
-        (click)="selectCocktail.emit(cocktail.name)"
+        (click)="selectedCocktailId.set(cocktail._id)"
         class="px-12 py-6 my-2 radius"
       >
         <h3>{{ cocktail.name }}</h3>
@@ -38,6 +45,6 @@ export class CocktailsListComponent {
       name.toLowerCase().includes(this.filter().toLowerCase())
     )
   );
-  selectedCocktailName = input.required();
-  selectCocktail = output<string>();
+
+  selectedCocktailId = model<string | null>(null);
 }
