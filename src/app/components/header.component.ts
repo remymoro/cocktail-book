@@ -4,12 +4,23 @@ import { Component } from '@angular/core';
   selector: 'app-header',
   imports: [],
   template: `
-    <p>
-      header works!
-    </p>
+    <div class="flex-auto text-bold text-lg">Cocktails</div>
+    <ul>
+      <li class="flex flex-row gap-16">
+        <a href="#">Liste des cocktails</a>
+        <a href="#">Panier</a>
+      </li>
+    </ul>
   `,
-  styles: ``
+  styles: `
+    :host {
+      display: flex;
+      align-items:center;
+      background-color: var(--primary);
+      color: white;
+      height: 56px;
+      padding: 0 16px;
+    }
+  `,
 })
-export class HeaderComponent {
-
-}
+export class HeaderComponent {}
