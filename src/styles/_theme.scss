@@ -38,6 +38,12 @@ body {
   color: white;
 }
 
+.btn-outline-primary {
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  background-color: white;
+}
+
 .btn-primary:hover {
   background-color: var(--dark);
 }

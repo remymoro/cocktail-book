@@ -22,7 +22,7 @@ import { seedData } from './shared/data/seed-data';
   `,
 })
 export class AppComponent implements OnInit {
-  private readonly apiUrl = 'https://restapi.fr/api/cocktails';
+  private readonly apiUrl = 'https://restapi.fr/api/acocktails';
   private http: HttpClient = inject(HttpClient);
 
   ngOnInit(): void {
