@@ -42,7 +42,6 @@ import { Cocktail } from 'app/shared/interfaces';
       </li>
       }
     </ul>
-    <button class="btn btn-primary">Ajouter un cocktail</button>
   `,
   styles: `
     li:hover {
