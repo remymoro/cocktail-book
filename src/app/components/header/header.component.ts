@@ -9,6 +9,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     <div class="flex-auto text-bold text-lg">Cocktails</div>
     <ul class="xs-hide flex flex-row gap-16">
       <li>
+        <a routerLink="/admin" routerLinkActive="active-link">Admin</a>
+      </li>
+      <li>
         <a routerLink="/cocktails" routerLinkActive="active-link">Cocktails</a>
       </li>
       <li>
