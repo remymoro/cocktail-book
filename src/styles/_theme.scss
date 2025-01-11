@@ -53,3 +53,9 @@ input {
   border-radius: 6px;
   padding: 12px;
 }
+
+.active-link {
+  background-color: var(--dark);
+  border-radius: var(--radius);
+  color: white;
+}

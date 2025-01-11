@@ -1,16 +1,19 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FooterComponent } from './components/footer.component';
-import { CocktailsComponent } from './components/cocktails/cocktails.component';
-import { HeaderComponent } from './components/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { seedData } from './shared/data/seed-data';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [FooterComponent, CocktailsComponent, HeaderComponent],
+  imports: [FooterComponent, RouterOutlet, HeaderComponent],
   template: `
     <app-header />
-    <app-cocktails class="flex-auto" />
+    <!---<app-cocktails class="flex-auto" />!-->
+    <div class="flex-auto flex flex-col">
+      <router-outlet></router-outlet>
+    </div>
     <app-footer />
   `,
   styles: `
