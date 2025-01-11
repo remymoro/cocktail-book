@@ -1,16 +1,20 @@
 import { Injectable, resource } from '@angular/core';
 import { Cocktail } from '../interfaces';
 
+const BASE_URL = 'https://restapi.fr/api/acocktails';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CocktailsService {
-  private base_URL = 'https://restapi.fr/api/acocktails';
-
   cocktailsResource = resource({
-    loader: async (): Promise<Cocktail[]> =>
-      (await fetch(this.base_URL)).json(),
+    loader: async (): Promise<Cocktail[]> => (await fetch(BASE_URL)).json(),
   });
 
-  constructor() {}
+  async deleteCocktail(cocktailId: string) {
+    await fetch(`${BASE_URL}/${cocktailId}`, {
+      method: 'DELETE',
+    });
+    this.cocktailsResource.reload();
+  }
 }
